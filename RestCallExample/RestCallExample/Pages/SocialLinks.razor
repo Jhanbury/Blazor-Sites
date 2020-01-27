@@ -1,0 +1,22 @@
+@page "/links"
+@using RestCallExample.Components
+@using Site.Services
+@inject ISocialLinkService SocialLinkService
+<h3>SocialLinks</h3>
+<ul>
+  @foreach (var link in socialLinks)
+  {
+    <SocialLink Platform="@link.Platform" Url="@link.Url" />
+  }
+</ul>
+
+@code {
+  IEnumerable<SocialLinkDto> socialLinks = new List<SocialLinkDto>();
+
+  protected async override Task OnInitializedAsync()
+  {
+    await base.OnInitializedAsync();
+    socialLinks = await SocialLinkService.GetSocialLinks(1);
+  }
+
+}

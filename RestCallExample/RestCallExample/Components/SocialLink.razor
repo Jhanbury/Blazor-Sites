@@ -1,0 +1,24 @@
+@inject IJSRuntime jsRuntime
+<li @onclick="e => OpenLink(Url)">
+  <div>
+    <span>@Platform</span>
+  </div>
+</li>
+
+@code
+{
+  [Parameter]
+  public string Platform {get;set;}
+  [Parameter]
+  public string Url {get;set;}
+}
+@functions
+
+{
+
+private void OpenLink(string linkUrl)
+{
+  jsRuntime.InvokeAsync<object>("open", linkUrl);
+}
+
+}
